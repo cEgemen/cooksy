@@ -7,11 +7,25 @@ const appSpaces = {
     xxl : 30
 }
 
+const appBorderRadius = {
+    sm     : 4,
+    md     : 6,
+    lg     : 10,
+    circle : (width) => width / 2
+}
+
 const appFontSize = {
-    sm  : 8,
-    md  : 16,
-    lg  : 24,
+    sm  : 14,
+    md  : 18,
+    lg  : 26,
     xl  : 32,
 }
 
-export default {appSpaces,appFontSize}
+const appFontWeight = {
+    normal    : 400,
+    medium    : 500,
+    semibold  : 600,
+    bold      : 700
+}
+
+export {appSpaces,appFontSize,appFontWeight,appBorderRadius}
