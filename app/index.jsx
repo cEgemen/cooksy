@@ -2,7 +2,7 @@ import {FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import { BasePage } from '../components'
 import { appBorderRadius, appFontSize, appFontWeight, appSpaces } from '../consts/appStyleConst'
 import { worldCuisines } from '../consts/appDataConst'
-import { breadIcon,cookieIcon,hamburgerIcon,kebabIcon,pizzaIcon } from '../assets'
+import { basketIcon, breadIcon,clockIcon,cookieIcon,hamburgerIcon,kebabIcon,pizzaIcon } from '../assets'
 import { useState } from 'react'
 
 
@@ -54,7 +54,34 @@ const Index = () => {
        />
        <Text style={{fontSize:appFontSize.md,fontWeight:appFontWeight.medium,marginBottom:appSpaces.md}}>Recommended</Text>
        <FlatList
-          
+          data={[1,1,1,1]}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{flexGrow:1,columnGap:appSpaces.lg,padding:appSpaces.md}}
+          keyExtractor={(item,index) => index*10}
+          renderItem={({item,index}) => {
+                
+                return <>
+                        <View style={styles.recoCardWrapper}>
+                           <View style={styles.recoFoodImg}>
+
+                           </View>
+                           <View style={styles.recoCardContent} >
+                             <Text style={{marginRight:appSpaces.md,fontSize:appFontSize.md,fontWeight:appFontWeight.medium}}>Recommendation Name dasdsadas</Text>
+                             <View style={{marginVertical:"auto",flexDirection:"row",justifyContent:"space-around"}}>
+                                 <View style={{flexDirection:"row",alignItems:"center"}}>
+                                   <Image source={clockIcon} style={{width:40,height:40}} />
+                                   <Text style={{fontSize:appFontSize.sm,fontWeight:appFontWeight.semibold}}>5 min</Text>
+                                 </View>
+                                 <View style={{flexDirection:"row",alignItems:"center"}}>
+                                   <Image source={basketIcon} style={{width:40,height:40}} />
+                                   <Text style={{fontSize:appFontSize.sm,fontWeight:appFontWeight.semibold}}>x 4</Text>
+                                 </View>
+                             </View>
+                           </View>
+                        </View> 
+                      </>
+          }}
         />
     </BasePage>
   )
@@ -87,5 +114,27 @@ const styles = StyleSheet.create({
    },
    flatItem : {
       alignItems:"center"
+   },
+   recoCardWrapper : {
+       width:"220",
+       height:"320",
+       paddingRight:appSpaces.lg,
+   },
+   recoCardContent : {
+       flex:1,
+       backgroundColor:"rgb(216, 247, 233)",
+       borderRadius:appBorderRadius.lg,
+       paddingTop:180,
+       paddingHorizontal:appSpaces.md
+   },
+   recoFoodImg : {
+       position:"absolute",
+       right:"0",
+       top:"40",
+       zIndex:1,
+       width:"120",
+       height:"120",
+       borderRadius:appBorderRadius.circle(120),
+       backgroundColor:"white",
    }
 })
