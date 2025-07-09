@@ -4,13 +4,29 @@ import { appBorderRadius, appFontSize, appFontWeight, appSpaces } from '../const
 import { worldCuisines } from '../consts/appDataConst'
 import { basketIcon, breadIcon,clockIcon,cookieIcon,hamburgerIcon,kebabIcon,pizzaIcon } from '../assets'
 import { useState } from 'react'
+import { router } from 'expo-router'
 
 
 const Index = () => {
   const [activeCuisine,setActiveCuisine] = useState(0)
+  const [activeCountry,setActiveCountry] = useState(0)
   const foodIcons = [kebabIcon,pizzaIcon,cookieIcon,hamburgerIcon,breadIcon]
 
-  const handleChangeActiveCuisine = (value) => setActiveCuisine(oldState => value)
+  const handleChangeActiveCuisine = (value) => {
+      if(value !== activeCuisine)
+      { 
+         setActiveCuisine(oldState => value)
+         setActiveCountry(oldState => 0)
+      }                     
+                                                }
+  
+   const handleChangeActiveCountry = (value) => {
+        setActiveCountry(oldState => value)
+   }           
+   
+   const goRecoDetail = (name) => {
+        router.push("/detail")    
+   }
 
   return (
     <BasePage  pageWrapper={styles.wrapper}>
@@ -45,10 +61,11 @@ const Index = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{flexGrow:1,paddingHorizontal:appSpaces.md,justifyContent:"space-between",columnGap:appSpaces.xxl,marginBottom:appSpaces.lg}}
           renderItem={({item,index}) => {
-               
-               return <Pressable style={{alignItems:"center"}}>
+               const isActive = index === activeCountry
+               const textColor = isActive ? "rgb(152, 152, 205)" : "rgb(179, 179, 179)"
+               return <Pressable style={{alignItems:"center"}} onPress={() => handleChangeActiveCountry(index)}>
                          <Image source={foodIcons[index%foodIcons.length]} style={{width:40,height:40}} />   
-                         <Text style={{fontWeight:appFontWeight.semibold}}>{item}</Text>
+                         <Text style={{fontWeight:appFontWeight.semibold,color:textColor}}>{item}</Text>
                       </Pressable>
           }}
        />
@@ -62,24 +79,23 @@ const Index = () => {
           renderItem={({item,index}) => {
                 
                 return <>
-                        <View style={styles.recoCardWrapper}>
+                        <Pressable style={styles.recoCardWrapper} onPress={() => goRecoDetail()}>
                            <View style={styles.recoFoodImg}>
-
                            </View>
                            <View style={styles.recoCardContent} >
                              <Text style={{marginRight:appSpaces.md,fontSize:appFontSize.md,fontWeight:appFontWeight.medium}}>Recommendation Name dasdsadas</Text>
                              <View style={{marginVertical:"auto",flexDirection:"row",justifyContent:"space-around"}}>
-                                 <View style={{flexDirection:"row",alignItems:"center"}}>
-                                   <Image source={clockIcon} style={{width:40,height:40}} />
+                                 <View style={{flexDirection:"row",alignItems:"center",columnGap:4}}>
+                                   <Image source={clockIcon} style={{width:30,height:30}} />
                                    <Text style={{fontSize:appFontSize.sm,fontWeight:appFontWeight.semibold}}>5 min</Text>
                                  </View>
-                                 <View style={{flexDirection:"row",alignItems:"center"}}>
-                                   <Image source={basketIcon} style={{width:40,height:40}} />
+                                 <View style={{flexDirection:"row",alignItems:"center",columnGap:4}}>
+                                   <Image source={basketIcon} style={{width:30,height:30}} />
                                    <Text style={{fontSize:appFontSize.sm,fontWeight:appFontWeight.semibold}}>x 4</Text>
                                  </View>
                              </View>
                            </View>
-                        </View> 
+                        </Pressable> 
                       </>
           }}
         />

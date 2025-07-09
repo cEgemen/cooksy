@@ -5,10 +5,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 const BasePage = ({children,pageWrapper={}}) => {
 
   const insets = useSafeAreaInsets()   
-  const safeArea = {paddingLeft:insets.left,paddingTop:insets.top,paddingRight:insets.right,paddingBottom:insets.bottom}
+  const safeArea = {flex:1,paddingLeft:insets.left,paddingTop:insets.top,paddingRight:insets.right,paddingBottom:insets.bottom}
   return ( 
     <View style={safeArea} >
-      <View style={pageWrapper}>
+      <View style={[pageWrapper]}>
         {children}
       </View>
     </View>
@@ -18,5 +18,5 @@ const BasePage = ({children,pageWrapper={}}) => {
 export default BasePage
 
 const styles = StyleSheet.create({
- 
+    
 })

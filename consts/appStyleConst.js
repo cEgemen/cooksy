@@ -11,6 +11,8 @@ const appBorderRadius = {
     sm     : 4,
     md     : 6,
     lg     : 10,
+    xl     : 20,
+    xxl    : 40,
     circle : (width) => width / 2
 }
 
